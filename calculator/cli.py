@@ -2,10 +2,19 @@ from calculator.operations import add, subtract, multiply, divide, DivisionByZer
 from calculator.memory import Memory
 from calculator.history import History
 
+def get_number(prompt: str) -> float:
+    """Retry invalid numeric input without losing the running session."""
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Ошибка: введите число")
+
+
 def get_two_numbers() -> tuple[float, float]:
     """Запрашивает у пользователя два числа и возвращает их парой"""
-    a = float(input("Введите первое число: "))
-    b = float(input("Введите второе число: "))
+    a = get_number("Введите первое число: ")
+    b = get_number("Введите второе число: ")
     return a, b
 
 def run() -> None:
@@ -61,12 +70,12 @@ def run() -> None:
                     print("Ошибка: деление на ноль недопустимо")
 
             case '5':
-                value = float(input("Введите число: "))
+                value = get_number("Введите число: ")
                 memory.add(value)
                 print(f"Текущее значение памяти: {memory.recall()}")
 
             case '6':
-                value = float(input("Введите число: "))
+                value = get_number("Введите число: ")
                 memory.subtract(value)
                 print(f"Текущее значение памяти: {memory.recall()}")
 

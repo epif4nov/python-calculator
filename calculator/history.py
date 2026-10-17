@@ -11,7 +11,7 @@ class History:
 
     def get_all(self) -> list[str]:
         """Выводит текущее значение из истории"""
-        return self._entries
+        return self._entries.copy()
 
     def clear(self) -> None:
         """Удаляет предыдущие записи из истории"""
